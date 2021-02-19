@@ -36,19 +36,46 @@ class CoffiApp extends Component {
 
 
   }
+
+  /*getLocation(locID){
+    let sendData = {
+      email: this.state.email,
+      password: this.state.password
+    }
+
+    return fetch("http://10.0.2.2:3333/api/1.0.0/user/login", {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(sendData)
+    })
+    .then((response) => response.json())
+    .then((respJson) => {
+      this.setState({
+        userID: respJson.user_id,
+        userToken: respJson.session_token
+      })
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }*/
   
   render(){
     if(this.state.loading){
       return(
         <View>
-          
+          <Text>Loading...</Text>
         </View>
-      )
+      );
     }
     else{
       return(
       <View>
-
+        <ScrollView>
+          
+        </ScrollView>
       </View>
       );
     }

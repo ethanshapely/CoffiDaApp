@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Login extends Component{
 
@@ -16,6 +17,7 @@ class Login extends Component{
     }
 
     login(){
+        
         let sendData = {
             email: this.state.email,
             password: this.state.password
@@ -28,12 +30,18 @@ class Login extends Component{
             },
             body: JSON.stringify(sendData)
         })
-        .then((response) => response.json())
+        .then((response) => {
+            if(response.status === 200){
+                return response.json()
+            }else if(response.status === 400){
+                throw "Invalid email/password"
+            }else{
+                throw "Server side error"
+            }
+        })
         .then((respJson) => {
-            this.setState({
-                userID: respJson.user_id,
-                userToken: respJson.session_token
-            })
+            await AsyncStorage.setItem('@user_id', JSON.stringify(respJson.user_id))
+            await AsyncStorage.setItem('@user_token', respJson.session_token)
         })
         .catch((error) => {
             console.log(error);

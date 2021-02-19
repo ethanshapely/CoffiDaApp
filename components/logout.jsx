@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Logout extends Component{
 
@@ -18,19 +19,25 @@ class Logout extends Component{
     }*/
 
     logout(){
-        // handle user authorisation
+
+        const token = AsyncStorage.getItem('@user_token');
+
         return fetch("http://10.0.2.2:3333/api/1.0.0/user/logout", {
             method: 'post',
             headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(sendData)
+                'Content-Type': 'application/json',
+                'X-Authorisation': token
+            }
         })
         .then((response) => {
-            this.setState({
-                userID: "",
-                userToken: ""
-            })
+            if(response.status === 200){
+                await AsyncStorage.setItem('@user_id', "")
+                await AsyncStorage.setItem('@user_token', "")
+            }else if(response.status === 401){
+                throw "Unauthorised: You must be logged in in order to logout"
+            }else{
+                throw "Server side error"
+            }
         })
         .catch((error) => {
             console.log(error);
@@ -39,13 +46,11 @@ class Logout extends Component{
 
     render(){
         return(
-            <ScrollView>
-                <TouchableOpacity
-                    onPress={() => this.login()}
-                >
-                    <Text>Confirm</Text>
-                </TouchableOpacity>
-            </ScrollView>
+            <TouchableOpacity
+                onPress={() => this.logout()}
+            >
+                <Text>Logout</Text>
+            </TouchableOpacity>
         );
     }
 }

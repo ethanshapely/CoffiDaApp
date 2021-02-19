@@ -16,9 +16,10 @@ class SignUp extends Component{
     }
 
     newUser(){
+        
         let sendData = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
+            first_name: this.state.firstName,
+            last_name: this.state.lastName,
             email: this.state.email,
             password: this.state.password
         }
@@ -30,8 +31,14 @@ class SignUp extends Component{
             },
             body: JSON.stringify(sendData)
         })
-        .then((respones) => {
-            Alert.alert("New user created");
+        .then((response) => {
+            if(response.status === 201){
+                Alert.alert("New user created");
+            }else if(response.status === 400){
+                throw "Bad data sent on request"
+            }else{
+                throw "Server side error"
+            }
         })
         .catch((error) => {
             console.log(error);
