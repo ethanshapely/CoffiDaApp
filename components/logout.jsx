@@ -46,11 +46,10 @@ class Logout extends Component{
 
     render(){
         return(
-            <TouchableOpacity
-                onPress={() => this.logout()}
-            >
-                <Text>Logout</Text>
-            </TouchableOpacity>
+            <View>
+                <Button title="Logout" onPress={() => this.logout()} />
+                <Text>Are you sure you want to logout?</Text>
+            </View>
         );
     }
 }

@@ -9,7 +9,9 @@ class Review extends Component{
 
         this.state = {
             data: "",
-            photoPath: ""
+            photoPath: "",
+            locID: props.locID,
+            revID: props.revID
         };
     }
 
@@ -35,9 +37,12 @@ class Review extends Component{
             console.log(error);
         })
     }*/
+    componentDidMount(){
+        //
+    }
 
-    getReviewPhoto(locationID, reviewID){
-        return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+locationID+"/review/"+reviewID, {
+    getReviewPhoto(){
+        return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.locID+"/review/"+this.state.revID, {
             method: 'get'
         })
         .then((response) => {
