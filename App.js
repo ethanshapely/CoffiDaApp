@@ -14,6 +14,8 @@ import Home from './components/home';
 import Login from './components/login';
 import Logout from './components/logout';
 import SignUp from './components/signUp';
+import Profile from './components/profile';
+import getUserToken from './components/asynchFunctions'
 
 class CoffiApp extends Component {
   
@@ -24,7 +26,6 @@ class CoffiApp extends Component {
       loading: false,
       sessionToken: false
     };
-
 
   }
 
@@ -56,7 +57,7 @@ class CoffiApp extends Component {
   render(){
 
     const stackNav = createStackNavigator();
-    let token = AsyncStorage.getItem('@user_token');
+    const token = getUserToken();
     const nav = this.props.navigation;
 
     if(this.state.loading){
@@ -92,6 +93,7 @@ class CoffiApp extends Component {
               headerRight: () => (
                 <Button title="Logout" onPress={() => nav.navigate("Logout")} />
           )}} />
+          <stackNav.Screen name="Profile" component={Profile} />
           <stackNav.Screen name="Logout" component={Logout} />
         </stackNav.Navigator>
       );

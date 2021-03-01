@@ -2,45 +2,42 @@ import React, { Component } from 'react';
 import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet, TouchableNativeFeedback } from 'react-native';
 import {getUserToken, getUserId} from 'asynchFunctions';
 
-//Deprecated: Realised that I forgot about this component after making the profile component except that this was written to be more fitting for other users accounts,
-//            perhaps this will be re-used for viewing other user's accounts
-class Account extends Component{
-
+class Profile extends Component {
     constructor(props){
         super(props);
-
-        this.state = {
-            firstName: "",
-            lastName: "",
+        this.state={
+            token: null,
+            id: null,
+            firstname: "",
+            lastname: "",
             email: "",
-            password: ""
+            favLocations: {},
+            reviews: {},
+            likedReviews: {}
         };
-
     }
 
     componentDidMount(){
-        this.getUser();
+        let tokenVal = getUserToken();
+        let idVal = getUserId();
+        this.setState({
+            token: tokenVal,
+            id: idVal
+        });
     }
 
-    /*
-
-    */
-
-    getUser(){
-        const token = getUserToken();
-        const id = getUserId();
-
-        return fetch("http://10.0.2.2:3333/api/1.0.0/user/"+id, {
+    getUserInfo(){
+        return fetch("http://10.0.2.2:3333/api/1.0.0/user/"+this.state.id, {
             method: 'get',
             headers: {
-                'X-Authorisation': token
+                'X-Authorisation': this.state.token
             }
         })
         .then((response) => {
             if(response.status === 200){
                 return response.json()
             }else if(response.status === 401){
-                throw "Unauthorised: You must be logged in as a registered user to obtain user details"
+                throw "Unauthorised: You must be logged in to view your profile"
             }else if(response.status === 404){
                 throw "User not found"
             }else{
@@ -49,13 +46,13 @@ class Account extends Component{
         })
         .then((respJson) => {
             this.setState({
-                firstName: respJson.first_name,
-                lastName: respJson.last_name,
-                email: respJson.email
+                firstname: respJson.first_name,
+                lastname: respJson.last_name,
+                email: respJson.email,
+                favLocations: respJson.favourite_locations,
+                reviews: respJson.reviews,
+                likedReviews: respJson.likes_reviews
             })
-        })
-        .catch((error) => {
-            console.log(error);
         })
     }
 
@@ -91,12 +88,9 @@ class Account extends Component{
 
     render(){
         return(
-            <View>
-
-            </View>
+            <View></View>
         );
     }
-    
 }
 
-export default Account;
+export default Profile;

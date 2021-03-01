@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet, TouchableNativeFeedback } from 'react-native';
+import {getUserToken, getUserFavourites} from 'asynchFunctions';
 
 class Home extends Component {
     constructor(props){
         super(props);
+
         this.state={
-            locationsList: null
-        }
+            locationsList: null,
+            favourites: null
+        };
+
     }
 
     componentDidMount(){
         this.getAllLocations();
+        this.setState({
+            favourites: getUserFavourites()
+        })
     }
 
     getAllLocations(){
-        const token = AsyncStorage.getItem('@user_token');
+        const token = getUserToken();
 
         return fetch("http://10.0.2.2:3333/api/1.0.0/find", {
             method: 'get',
@@ -64,7 +71,7 @@ class Home extends Component {
     render(){
 
         const stackNav = createStackNavigator();
-        let token = AsyncStorage.getItem('@user_token')
+        const token = getUserToken();
 
         if(token === ""){
             //

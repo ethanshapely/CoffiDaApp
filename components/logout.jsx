@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {getUserToken, setUserToken, setUserId} from 'asynchFunctions';
 
 class Logout extends Component{
 
@@ -10,7 +10,7 @@ class Logout extends Component{
         this.state = {
             userID: "",
             userToken: ""
-        }
+        };
 
     }
 
@@ -20,7 +20,7 @@ class Logout extends Component{
 
     logout(){
 
-        const token = AsyncStorage.getItem('@user_token');
+        const token = getUserToken();
 
         return fetch("http://10.0.2.2:3333/api/1.0.0/user/logout", {
             method: 'post',
@@ -31,8 +31,8 @@ class Logout extends Component{
         })
         .then((response) => {
             if(response.status === 200){
-                await AsyncStorage.setItem('@user_id', "")
-                await AsyncStorage.setItem('@user_token', "")
+                setUserToken("");
+                setUserId("");
             }else if(response.status === 401){
                 throw "Unauthorised: You must be logged in in order to logout"
             }else{

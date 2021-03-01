@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {setUserToken, setUserId, setUserReviews, setUserFavourites} from 'asynchFunctions';
 
 class Login extends Component{
 
@@ -13,7 +13,8 @@ class Login extends Component{
             userID: "",
             userToken: "",
             loading: false
-        }
+        };
+
     }
 
     login(){
@@ -21,7 +22,7 @@ class Login extends Component{
         let sendData = {
             email: this.state.email,
             password: this.state.password
-        }
+        };
 
         return fetch("http://10.0.2.2:3333/api/1.0.0/user/login", {
             method: 'post',
@@ -40,8 +41,8 @@ class Login extends Component{
             }
         })
         .then((respJson) => {
-            await AsyncStorage.setItem('@user_id', JSON.stringify(respJson.user_id))
-            await AsyncStorage.setItem('@user_token', respJson.session_token)
+            setUserToken(respJson.session_token)
+            setUserId(JSON.stringify(respJson.user_id))
         })
         .catch((error) => {
             console.log(error);
