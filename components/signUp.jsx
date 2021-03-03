@@ -34,9 +34,9 @@ class SignUp extends Component{
         .then((response) => {
             if(response.status === 201){
                 Alert.alert("New user created");
-            }else if(response.status === 400){
+            } else if(response.status === 400){
                 throw "Bad data sent on request"
-            }else{
+            } else{
                 throw "Server side error"
             }
         })

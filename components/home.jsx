@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet, TouchableNativeFeedback } from 'react-native';
-import {getUserToken, getUserFavourites} from 'asynchFunctions';
+import {getUserToken, getUserFavourites, setUserFavourites, setUserReviews} from 'asynchFunctions';
 
 class Home extends Component {
     constructor(props){
@@ -8,20 +8,30 @@ class Home extends Component {
 
         this.state={
             locationsList: null,
-            favourites: null
+            favourites: null,
+            loading: true
         };
 
     }
 
     componentDidMount(){
-        this.getAllLocations();
-        this.setState({
-            favourites: getUserFavourites()
-        })
+        let token = getUserToken();
+        if(token != ""){
+            this.getAllLocations();
+            this.getUserInfo();
+            this.setState({
+                favourites: getUserFavourites(),
+                loading: false
+            });
+        } else{
+            this.setState({
+                loading: false
+            });
+        }
     }
 
     getAllLocations(){
-        const token = getUserToken();
+        let token = getUserToken();
 
         return fetch("http://10.0.2.2:3333/api/1.0.0/find", {
             method: 'get',
@@ -32,11 +42,11 @@ class Home extends Component {
         .then((response) => {
             if(response.status === 200){
                 return response.json()
-            }else if(response.status === 400){
+            } else if(response.status === 400){
                 throw "Bad server request"
-            }else if(response.status === 401){
+            } else if(response.status === 401){
                 throw "Unauthorised: You must be logged in in order to logout"
-            }else{
+            } else{
                 throw "Server side error"
             }
         })
@@ -50,87 +60,83 @@ class Home extends Component {
         })
     }
 
+    getUserInfo(){
+        let token = getUserToken();
+        let id = getUserId();
+        
+        return fetch("http://10.0.2.2:3333/api/1.0.0/user/"+JSON.parse(id), {
+            method: 'get',
+            headers: {
+                'X-Authorisation': token
+            }
+        })
+        .then((response) => {
+            if(response.status === 200){
+                return response.json()
+            } else if(response.status === 401){
+                throw "Unauthorised: You must be logged in in order to have you're favourites processed"
+            } else if(response.status === 404){
+                throw "No user found for request"
+            } else{
+                throw "Server side error"
+            }
+        })
+        .then((respJson) => {
+            setUserFavourites(JSON.stringify(respJson.favourite_locations))
+            setUserReviews(JSON.stringify(respJson.reviews))
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
     renderLocationList(){
         const nav = this.props.navigation;
-        return(
-            <ScrollView>
-                {
-                    this.state.locationsList.map((item) => {
-                        return(
-                            <TouchableOpacity onPress={() => nav.navigate("Location",{id: item.location_id})}>
-                                <Text>{item.location_name}</Text>
-                                <Image source={require(item.photo_path)} />
-                            </TouchableOpacity>
-                        );
-                    })
-                }
-            </ScrollView>
-        );
+        let token = getUserToken();
+        if(this.state.loading){
+            return(
+              <View>
+                <Text>Loading...</Text>
+              </View>
+            );
+        } else{
+            return(
+                <ScrollView>
+                    {
+                        this.state.locationsList.map((item) => {
+                            return(
+                                <TouchableOpacity onPress={() => {
+                                    if(token != ""){
+                                        nav.navigate("Location",{id: item.location_id})
+                                    }
+                                }}>
+                                    <Text>{item.location_name}</Text>
+                                    <Image source={require(item.photo_path)} />
+                                </TouchableOpacity>
+                            );
+                        })
+                    }
+                </ScrollView>
+            );
+        }
     }
 
     render(){
-
-        const stackNav = createStackNavigator();
-        const token = getUserToken();
-
-        if(token === ""){
-            //
+        if(this.state.loading){
+            return(
+                <View>
+                    <Text>Loading...</Text>
+                </View>
+            );
+        } else{
+            return(
+                <View>
+                    <Title>CoffiDa</Title>
+                    <Text>Welcome to the CoffiDa App, below you will find a collection of assorted Café</Text>
+                    {this.renderLocationList()}
+                </View>
+            );
         }
-        else{
-            //
-        }
-
-        /*
-        <Location id=1 /> 
-        */
-
-        /*
-        const nav = this.props.navigation;
-
-        return(
-            <stackNav.Navigator>
-                <stackNav.Screen name="Home" component={Home} 
-                    options={{
-                        headerTitle: "Home", 
-                        headerRight: () => (
-                            <Button title="Logout" onPress{() => nav.navigate("Logout")} />
-                        )}} />
-                <stackNav.Screen name="Logout" component={Logout} />
-                
-            </stackNav.Navigator>
-        );
-        
-        or...
-        return(
-            <stackNav.Navigator>
-                <Home />
-            </stackNav.Navigator>
-        );
-
-        Home render:
-        return(
-            <stackNav.Screen name="HomeSceen" component={HomeScreen} 
-                options={{
-                    headerTitle: "Home", 
-                    headerRight: () => (
-                        <Button title="Logout" onPress{() => nav.navigate("Logout")} />
-            )}} />
-        );
-        */
-
-        /*return(
-            <stackNav.Navigator>
-                <stackNav.Screen name="Home" component={Home} 
-                    options={{
-                        headerTitle: "Home", 
-                        headerRight: () => (
-                            <Button title="Login" onPress{() => nav.navigate("Login")} />
-                            <Button title="SignUp" onPress{() => nav.navigate("SignUp")} />
-                        )}} />
-                <stackNav.Screen name="Login" component={Login} />
-                <stackNav.Screen name="SignUp" component={SignUp} />
-            </stackNav.Navigator>
-        );*/
     }
 }
 

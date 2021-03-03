@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import {setUserToken, setUserId, setUserReviews, setUserFavourites} from 'asynchFunctions';
+import {setUserToken, setUserId, setUserFavourites, setUserReviews} from 'asynchFunctions';
 
 class Login extends Component{
 
@@ -18,7 +18,9 @@ class Login extends Component{
     }
 
     login(){
-        
+        this.setState({
+            loading: true
+        });
         let sendData = {
             email: this.state.email,
             password: this.state.password
@@ -34,56 +36,71 @@ class Login extends Component{
         .then((response) => {
             if(response.status === 200){
                 return response.json()
-            }else if(response.status === 400){
+            } else if(response.status === 400){
                 throw "Invalid email/password"
-            }else{
+            } else{
                 throw "Server side error"
             }
         })
         .then((respJson) => {
-            setUserToken(respJson.session_token)
-            setUserId(JSON.stringify(respJson.user_id))
+            setUserToken(respJson.session_token);
+            setUserId(JSON.stringify(respJson.user_id));
+            setUserFavourites("");
+            setUserReviews("");
+            this.props.navigation.goBack();
         })
         .catch((error) => {
+            this.setState({
+                loading: false
+            });
             console.log(error);
         })
     }
 
     render(){
-        return(
-            <View>
-                <ScrollView>
-                    {/* Main Title (different styling) */}
-                    <Text>Login</Text>
-                    
-                    <View>
-                        <Text>Email:</Text>
-                        <TextInput 
-                            placeholder="Type here..."
-                            onChangeText={(email => this.setState({email}))}
-                            value={this.state.email}
-                        />
-                    </View>
+        if(this.state.loading){
+            return(
+                <View>
+                    <Text>Loading...</Text>
+                </View>
+            );
+        } else{
+            return(
+                <View>
+                    <ScrollView>
+                        {/* Main Title (different styling) */}
+                        <Text>Login</Text>
+                        
+                        <View>
+                            <Text>Email:</Text>
+                            <TextInput 
+                                placeholder="Type here..."
+                                onChangeText={(email => this.setState({email}))}
+                                value={this.state.email}
+                            />
+                        </View>
 
-                    <View>
-                        <Text>Password:</Text>
-                        <TextInput 
-                            placeholder="Type here..."
-                            onChangeText={(password => this.setState({password}))}
-                            value={this.state.password}
-                        />
-                    </View>
+                        <View>
+                            <Text>Password:</Text>
+                            <TextInput 
+                                secureTextEntry={true}
+                                placeholder="Type here..."
+                                onChangeText={(password => this.setState({password}))}
+                                value={this.state.password}
+                            />
+                        </View>
 
-                    <View>
-                        <TouchableOpacity
-                            onPress={() => this.login()}
-                        >
-                            <Text>Confirm</Text>
-                        </TouchableOpacity>
-                    </View>
-                </ScrollView>
-            </View>
-        );
+                        <View>
+                            <TouchableOpacity
+                                onPress={() => this.login()}
+                            >
+                                <Text>Confirm</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </ScrollView>
+                </View>
+            );
+        }
     }
 }
 

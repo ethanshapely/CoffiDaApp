@@ -32,7 +32,7 @@ const setUserId = async(value) => {
     }
 }
 
-const getUserFavourites = async(value) => {
+const getUserFavourites = async() => {
     try{
         return await AsyncStorage.getItem('@user_favourites')
     } catch(e){
@@ -48,7 +48,7 @@ const setUserFavourites = async(value) => {
     }
 }
 
-const getUserReviews = async(value) => {
+const getUserReviews = async() => {
     try{
         return await AsyncStorage.getItem('@user_reviews')
     } catch(e){

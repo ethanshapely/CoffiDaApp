@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
-import {getUserToken, setUserToken, setUserId} from 'asynchFunctions';
+import {getUserToken, setUserToken, setUserId, setUserFavourites} from 'asynchFunctions';
 
 class Logout extends Component{
 
@@ -9,7 +9,8 @@ class Logout extends Component{
 
         this.state = {
             userID: "",
-            userToken: ""
+            userToken: "",
+            loading: false
         };
 
     }
@@ -19,13 +20,15 @@ class Logout extends Component{
     }*/
 
     logout(){
-
+        this.setState({
+            loading: true
+        });
         const token = getUserToken();
 
         return fetch("http://10.0.2.2:3333/api/1.0.0/user/logout", {
             method: 'post',
             headers: {
-                'Content-Type': 'application/json',
+                //'Content-Type': 'application/json',
                 'X-Authorisation': token
             }
         })
@@ -33,24 +36,37 @@ class Logout extends Component{
             if(response.status === 200){
                 setUserToken("");
                 setUserId("");
-            }else if(response.status === 401){
+                setUserFavourites("");
+                this.props.navigation.goBack();
+            } else if(response.status === 401){
                 throw "Unauthorised: You must be logged in in order to logout"
-            }else{
+            } else{
                 throw "Server side error"
             }
         })
         .catch((error) => {
+            this.setState({
+                loading: false
+            });
             console.log(error);
         })
     }
 
     render(){
-        return(
-            <View>
-                <Button title="Logout" onPress={() => this.logout()} />
-                <Text>Are you sure you want to logout?</Text>
-            </View>
-        );
+        if(this.state.loading){
+            return(
+                <View>
+                    <Text>Loading...</Text>
+                </View>
+            );
+        } else{
+            return(
+                <View>
+                    <Button title="Logout" onPress={() => this.logout()} />
+                    <Text>Are you sure you want to logout?</Text>
+                </View>
+            );
+        }
     }
 }
 

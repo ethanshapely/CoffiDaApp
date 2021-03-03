@@ -17,7 +17,7 @@ class Review extends Component{
             reviewBody: props.data.review_body,
             likes: props.data.likes,
             photoPath: "",
-            userOwned: false,
+            // userOwned: false,
             liked: false
         };
     }
@@ -33,9 +33,9 @@ class Review extends Component{
         .then((response) => {
             if(response.status === 200){
                 return response.json()
-            }else if(response.status === 404){
+            } else if(response.status === 404){
                 throw "No image found"
-            }else{
+            } else{
                 throw "Server side error"
             }
         })
@@ -43,73 +43,6 @@ class Review extends Component{
             this.setState({
                 photoPath: respJson.photo_path
             });
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-    }
-
-    updateReview(overallR, priceR, qualityR, clenlinessR, revBody){
-        let token = getUserToken();
-        let sendData={
-            overall_rating: overallR,
-            price_rating: priceR,
-            quality_rating: qualityR,
-            clenliness_rating: clenlinessR,
-            review_body: revBody
-        }
-
-        return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.locID+"/review/"+this.state.revID, {
-            method: 'patch',
-            headers: {
-                'X-Authorisation': token,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(sendData)
-        })
-        .then((response) => {
-            if(response.status === 200){
-                console.log("Review updated")
-            }else if(response.status === 400){
-                throw "Bad request sent"
-            }else if(response.status === 401){
-                throw "Unauthorised: You must be logged in in order to edit a review"
-            }else if(response.status === 403){
-                throw "Forbidden: You cannot update a review that doesn't exist"
-            }else if(response.status === 404){
-                throw "No review found for request"
-            }else{
-                throw "Server side error"
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-    }
-
-    deleteReview(){
-        let token = getUserToken();
-
-        return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.locID+"/review/"+this.state.revID, {
-            method: 'delete',
-            headers: {
-                'X-Authorisation': token
-            }
-        })
-        .then((response) => {
-            if(response.status === 200){
-                console.log("Review deleted")
-            }else if(response.status === 400){
-                throw "Bad request sent"
-            }else if(response.status === 401){
-                throw "Unauthorised: You must be logged in in order to delete a review"
-            }else if(response.status === 403){
-                throw "Forbidden: You cannot delete a review that doesn't exist"
-            }else if(response.status === 404){
-                throw "No review found for request"
-            }else{
-                throw "Server side error"
-            }
         })
         .catch((error) => {
             console.log(error);
@@ -132,13 +65,13 @@ class Review extends Component{
         .then((response) => {
             if(response.status === 200){
                 console.log("Photo added")
-            }else if(response.status === 400){
+            } else if(response.status === 400){
                 throw "Bad request sent"
-            }else if(response.status === 401){
+            } else if(response.status === 401){
                 throw "Unauthorised: You must be logged in in order to add a photo to a review"
-            }else if(response.status === 404){
+            } else if(response.status === 404){
                 throw "No review found for request"
-            }else{
+            } else{
                 throw "Server side error"
             }
         })
@@ -159,15 +92,15 @@ class Review extends Component{
         .then((response) => {
             if(response.status === 200){
                 console.log("Photo deleted")
-            }else if(response.status === 400){
+            } else if(response.status === 400){
                 throw "Bad request sent"
-            }else if(response.status === 401){
+            } else if(response.status === 401){
                 throw "Unauthorised: You must be logged in in order to delete a review"
-            }else if(response.status === 403){
+            } else if(response.status === 403){
                 throw "Forbidden: You cannot delete a review that doesn't exist"
-            }else if(response.status === 404){
+            } else if(response.status === 404){
                 throw "No review found for request"
-            }else{
+            } else{
                 throw "Server side error"
             }
         })
@@ -188,15 +121,15 @@ class Review extends Component{
         .then((response) => {
             if(response.status === 200){
                 console.log("Like added")
-            }else if(response.status === 400){
+            } else if(response.status === 400){
                 throw "Bad request sent"
-            }else if(response.status === 401){
+            } else if(response.status === 401){
                 throw "Unauthorised: You must be logged in in order to like a review"
-            }else if(response.status === 403){
+            } else if(response.status === 403){
                 throw "Forbidden: You cannot like a review that doesn't exist"
-            }else if(response.status === 404){
+            } else if(response.status === 404){
                 throw "No review found for request"
-            }else{
+            } else{
                 throw "Server side error"
             }
         })
@@ -217,15 +150,15 @@ class Review extends Component{
         .then((response) => {
             if(response.status === 200){
                 console.log("Like removed")
-            }else if(response.status === 400){
+            } else if(response.status === 400){
                 throw "Bad request sent"
-            }else if(response.status === 401){
+            } else if(response.status === 401){
                 throw "Unauthorised: You must be logged in in order to unlike a review"
-            }else if(response.status === 403){
+            } else if(response.status === 403){
                 throw "Forbidden: You cannot unlike a review that doesn't exist"
-            }else if(response.status === 404){
+            } else if(response.status === 404){
                 throw "No review found for request"
-            }else{
+            } else{
                 throw "Server side error"
             }
         })
@@ -240,7 +173,7 @@ class Review extends Component{
             this.setState({
                 liked: true
             });
-        }else{
+        } else{
             this.unlikeReview();
             this.setState({
                 liked: false
@@ -251,44 +184,43 @@ class Review extends Component{
     handleLikeText(){
         if(this.state.liked){
             return "Unlike"
-        }else{
+        } else{
             return "Like"
         }
     }
 
     render(){
-        if(this.state.userOwned){
-            return(
+        // if(this.state.userOwned){
+        //     return(
+        //         <View>
+        //             <label for="overallRating">Overall Rating</label>
+        //             <input type="number" id="overallRating" min={1} max={5} value={this.state.overallRating} />
+        //             <label for="priceRating">Price Rating</label>
+        //             <input type="number" id="priceRating" min={1} max={5} value={this.state.priceRating} />
+        //             <label for="qualityRating">Quality Rating</label>
+        //             <input type="number" id="qualityRating" min={1} max={5} value={this.state.qualityRating} />
+        //             <label for="clenlinessRating">Clenliness Rating</label>
+        //             <input type="number" id="clenlinessRating" min={1} max={5} value={this.state.clenlinessRating} />
+        //             <TextInput 
+        //                 onChangeText={text => onChangeText(text)}
+        //                 value={this.state.reviewBody} 
+        //             />
+        //             {/* add import image button and small preview of current image */}
+        //             <Button title="Update" onPress={this.updateReview} />
+        //         </View>
+        //     )
+        // } else{
+        return(
+            <View>
+                <h3>{this.state.name}</h3>
+                <Text>{this.state.reviewBody}</Text>
+                <Image url={this.state.photoPath} />
                 <View>
-                    <label for="overallRating">Overall Rating</label>
-                    <input type="number" id="overallRating" min={1} max={5} value={this.state.overallRating} />
-                    <label for="priceRating">Price Rating</label>
-                    <input type="number" id="priceRating" min={1} max={5} value={this.state.priceRating} />
-                    <label for="qualityRating">Quality Rating</label>
-                    <input type="number" id="qualityRating" min={1} max={5} value={this.state.qualityRating} />
-                    <label for="clenlinessRating">Clenliness Rating</label>
-                    <input type="number" id="clenlinessRating" min={1} max={5} value={this.state.clenlinessRating} />
-                    <TextInput 
-                        onChangeText={text => onChangeText(text)}
-                        value={this.state.reviewBody} 
-                    />
-                    {/* add import image button and small preview of current image */}
-                    <Button title="Update" onPress={this.updateReview} />
+                    <Text>Likes: {this.state.likes}</Text>
+                    <Button title={this.handleLikeText()} onPress={this.handleLike()} />
                 </View>
-            )
-        }else{
-            return(
-                <View>
-                    <h3>{this.state.name}</h3>
-                    <Text>{this.state.reviewBody}</Text>
-                    <Image url={this.state.photoPath} />
-                    <View>
-                        <Text>Likes: {this.state.likes}</Text>
-                        <Button title={this.handleLikeText()} onPress={this.handleLike()} />
-                    </View>
-                </View>
-            );
-        }
+            </View>
+        );
     }
 }
 export default Review;

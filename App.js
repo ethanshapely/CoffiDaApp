@@ -60,14 +60,17 @@ class CoffiApp extends Component {
     const token = getUserToken();
     const nav = this.props.navigation;
 
-    if(this.state.loading){
-      return(
-        <View>
-          <Text>Loading...</Text>
-        </View>
-      );
-    }
-    else if(token === ""){
+    /*
+      if(this.state.loading){
+        return(
+          <View>
+            <Text>Loading...</Text>
+          </View>
+        );
+      } 
+    */
+
+    if(token === ""){
       return(
         <stackNav.Navigator>
           <stackNav.Screen name="Home" component={Home} 
@@ -83,8 +86,7 @@ class CoffiApp extends Component {
           <stackNav.Screen name="SignUp" component={SignUp} />
         </stackNav.Navigator>
       );
-    }
-    else{//add Profile link
+    } else{//add Profile link
       return(
         <stackNav.Navigator>
           <stackNav.Screen name="Home" component={Home} 
