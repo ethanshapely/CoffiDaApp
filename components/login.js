@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import {setUserToken, setUserId, setUserFavourites, setUserReviews} from 'asynchFunctions';
+import {setUserToken, setUserId, setUserFavourites, setUserReviews} from './asynchFunctions';
 
 class Login extends Component{
 

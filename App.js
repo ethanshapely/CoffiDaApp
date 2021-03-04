@@ -1,12 +1,13 @@
+import 'react-native-gesture-handler';
 import React, {Component} from 'react';
 import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar} from 'react-native';
 
-import Home from './components/home';
-import Login from './components/login';
-import Logout from './components/logout';
-import SignUp from './components/signUp';
-import Profile from './components/profile';
-import getUserToken from './components/asynchFunctions'
+import Home from '../components/home';
+import Login from '../components/login';
+import Logout from '../components/logout';
+import SignUp from '../components/signUp';
+import Profile from '../components/profile';
+import getUserToken from '../components/asynchFunctions';
 
 class CoffiApp extends Component {
   
@@ -52,7 +53,7 @@ class CoffiApp extends Component {
           <stackNav.Screen name="SignUp" component={SignUp} />
         </stackNav.Navigator>
       );
-    } else{//add Profile link
+    } else{
       return(
         <stackNav.Navigator>
           <stackNav.Screen name="Home" component={Home} 

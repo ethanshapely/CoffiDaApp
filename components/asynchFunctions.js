@@ -1,6 +1,6 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 
-const getUserToken = async() => {
+export const getUserToken = async() => {
     try{
         return await AsyncStorage.getItem('@user_token');
     } catch(e){
@@ -8,7 +8,7 @@ const getUserToken = async() => {
     }
 }
 
-const setUserToken = async(value) => {
+export const setUserToken = async(value) => {
     try{
         return await AsyncStorage.setItem('@user_token', value);
     } catch(e){
@@ -16,7 +16,7 @@ const setUserToken = async(value) => {
     }
 }
 
-const getUserId = async() => {
+export const getUserId = async() => {
     try{
         return await AsyncStorage.getItem('@user_id');
     } catch(e){
@@ -24,7 +24,7 @@ const getUserId = async() => {
     }
 }
 
-const setUserId = async(value) => {
+export const setUserId = async(value) => {
     try{
         return await AsyncStorage.setItem('@user_id', value);
     } catch(e){
@@ -32,7 +32,7 @@ const setUserId = async(value) => {
     }
 }
 
-const getUserFavourites = async() => {
+export const getUserFavourites = async() => {
     try{
         return await AsyncStorage.getItem('@user_favourites')
     } catch(e){
@@ -40,7 +40,7 @@ const getUserFavourites = async() => {
     }
 }
 
-const setUserFavourites = async(value) => {
+export const setUserFavourites = async(value) => {
     try{
         return await AsyncStorage.setItem('@user_favourites', value)
     } catch(e){
@@ -48,7 +48,7 @@ const setUserFavourites = async(value) => {
     }
 }
 
-const getUserReviews = async() => {
+export const getUserReviews = async() => {
     try{
         return await AsyncStorage.getItem('@user_reviews')
     } catch(e){
@@ -56,19 +56,10 @@ const getUserReviews = async() => {
     }
 }
 
-const setUserReviews = async(value) => {
+export const setUserReviews = async(value) => {
     try{
         return await AsyncStorage.setItem('@user_reviews', value)
     } catch(e){
         console.log(e);
     }
 }
-
-export default getUserToken;
-export default setUserToken;
-export default getUserId;
-export default setUserId;
-export default getUserFavourites;
-export default setUserFavourites;
-export default getUserReviews;
-export default setUserReviews;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet, TouchableNativeFeedback } from 'react-native';
-import {getUserToken, getUserId, getUserFavourites, getUserReviews} from 'asynchFunctions';
-import Review from 'review';
+import {getUserToken, getUserId, getUserFavourites, getUserReviews} from './asynchFunctions';
+import Review from './review';
 
 class Location extends Component{
     constructor(props){

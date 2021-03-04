@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet, TouchableNativeFeedback } from 'react-native';
-import {getUserToken, getUserId, setUserFavourites} from 'asynchFunctions';
+import {getUserToken, getUserId, setUserFavourites} from './asynchFunctions';
 
 class Profile extends Component {
     constructor(props){

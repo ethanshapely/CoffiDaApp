@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet, TouchableNativeFeedback } from 'react-native';
-import {getUserToken, getUserFavourites, setUserFavourites, setUserReviews} from 'asynchFunctions';
+import {getUserToken, getUserFavourites, setUserFavourites, setUserReviews} from './asynchFunctions';
 
 class Home extends Component {
     constructor(props){
