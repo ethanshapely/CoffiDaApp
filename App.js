@@ -1,6 +1,8 @@
 import 'react-native-gesture-handler';
-import React, {Component} from 'react';
-import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar} from 'react-native';
+import React, { Component } from 'react';
+import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from '../components/home';
 import Login from '../components/login';
@@ -39,32 +41,36 @@ class CoffiApp extends Component {
 
     if(token === ""){
       return(
-        <stackNav.Navigator>
-          <stackNav.Screen name="Home" component={Home} 
-            options={{
-              headerTitle: "Home", 
-              headerRight: () => (
-                <View>
-                  <Button title="Login" onPress={() => nav.navigate("Login")} />
-                  <Button title="SignUp" onPress={() => nav.navigate("SignUp")} />
-                </View>
-          )}} />
-          <stackNav.Screen name="Login" component={Login} />
-          <stackNav.Screen name="SignUp" component={SignUp} />
-        </stackNav.Navigator>
+        <NavigationContainer>
+          <stackNav.Navigator initialRouteName="Home" >
+            <stackNav.Screen name="Home" component={Home} 
+              options={{
+                headerTitle: "Home", 
+                headerRight: () => (
+                  <View>
+                    <Button title="Login" onPress={() => nav.navigate("Login")} />
+                    <Button title="SignUp" onPress={() => nav.navigate("SignUp")} />
+                  </View>
+            )}} />
+            <stackNav.Screen name="Login" component={Login} />
+            <stackNav.Screen name="SignUp" component={SignUp} />
+          </stackNav.Navigator>
+        </NavigationContainer>
       );
     } else{
       return(
-        <stackNav.Navigator>
-          <stackNav.Screen name="Home" component={Home} 
-            options={{
-              headerTitle: "Home", 
-              headerRight: () => (
-                <Button title="Logout" onPress={() => nav.navigate("Logout")} />
-          )}} />
-          <stackNav.Screen name="Profile" component={Profile} />
-          <stackNav.Screen name="Logout" component={Logout} />
-        </stackNav.Navigator>
+        <NavigationContainer>
+          <stackNav.Navigator initialRouteName="Home">
+            <stackNav.Screen name="Home" component={Home} 
+              options={{
+                headerTitle: "Home", 
+                headerRight: () => (
+                  <Button title="Logout" onPress={() => nav.navigate("Logout")} />
+            )}} />
+            <stackNav.Screen name="Profile" component={Profile} />
+            <stackNav.Screen name="Logout" component={Logout} />
+          </stackNav.Navigator>
+        </NavigationContainer>
       );
     }
   }
