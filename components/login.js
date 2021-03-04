@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import {setUserToken, setUserId, setUserFavourites, setUserReviews} from './asynchFunctions';
+import asyncHelp from './asynchFunctions';
 
 class Login extends Component{
 
@@ -43,10 +43,10 @@ class Login extends Component{
             }
         })
         .then((respJson) => {
-            setUserToken(respJson.session_token);
-            setUserId(JSON.stringify(respJson.user_id));
-            setUserFavourites("");
-            setUserReviews("");
+            asyncHelp.setUserToken(respJson.session_token);
+            asyncHelp.setUserId(JSON.stringify(respJson.user_id));
+            asyncHelp.setUserFavourites("");
+            asyncHelp.setUserReviews("");
             this.props.navigation.goBack();
         })
         .catch((error) => {

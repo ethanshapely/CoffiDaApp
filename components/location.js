@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet, TouchableNativeFeedback } from 'react-native';
-import {getUserToken, getUserId, getUserFavourites, getUserReviews} from './asynchFunctions';
+import asyncHelp from './asynchFunctions';
 import Review from './review';
 
 class Location extends Component{
@@ -35,7 +35,7 @@ class Location extends Component{
 
     componentDidMount(){
         this.getLocationInfo();
-        let jsonFavourites = JSON.parse(getUserFavourites());
+        let jsonFavourites = JSON.parse(asyncHelp.getUserFavourites());
         for(item in jsonFavourites){
             if(item.location_id === this.locID){
                 this.setState({
@@ -52,7 +52,7 @@ class Location extends Component{
                 favButtonColour: "#969696"
             });
         }
-        let jsonReviews = JSON.parse(getUserReviews());
+        let jsonReviews = JSON.parse(asyncHelp.getUserReviews());
         for(item in jsonReviews){
             if(item.location.location_id === this.state.locID){
                 this.setState({
@@ -105,7 +105,7 @@ class Location extends Component{
     }
 
     favouriteLocation(){
-        const token = getUserToken();
+        const token = asyncHelp.getUserToken();
 
         return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.locID+"/favourite", {
             method: 'post',
@@ -132,7 +132,7 @@ class Location extends Component{
     }
 
     unfavouriteLocation(){
-        const token = getUserToken();
+        const token = asyncHelp.getUserToken();
 
         return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.locID+"/favourite", {
             method: 'delete',
@@ -164,7 +164,7 @@ class Location extends Component{
         this.setState({
             loading: true
         });
-        let token = getUserToken();
+        let token = asyncHelp.getUserToken();
         let sendData={
             overall_rating: this.state.userOverallRating,
             price_rating: this.state.userPriceRating,
@@ -210,7 +210,7 @@ class Location extends Component{
         this.setState({
             loading: true
         });
-        let token = getUserToken();
+        let token = asyncHelp.getUserToken();
         let sendData={
             overall_rating: this.state.userOverallRating,
             price_rating: this.state.userPriceRating,
@@ -257,7 +257,7 @@ class Location extends Component{
         this.setState({
             loading: true
         });
-        let token = getUserToken();
+        let token = asyncHelp.getUserToken();
 
         return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.locID+"/review/"+this.state.userReviewId, {
             method: 'delete',
@@ -393,7 +393,7 @@ class Location extends Component{
     }
 
     renderLocation(){
-        let token = getUserToken();
+        let token = asyncHelp.getUserToken();
 
         if(token === ""){
             return(

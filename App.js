@@ -4,12 +4,12 @@ import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar } from 'rea
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Home from '../components/home';
-import Login from '../components/login';
-import Logout from '../components/logout';
-import SignUp from '../components/signUp';
-import Profile from '../components/profile';
-import getUserToken from '../components/asynchFunctions';
+import Home from './components/home';
+import Login from './components/login';
+import Logout from './components/logout';
+import SignUp from './components/signUp';
+import Profile from './components/profile';
+import getUserToken from './components/asynchFunctions';
 
 class CoffiApp extends Component {
   

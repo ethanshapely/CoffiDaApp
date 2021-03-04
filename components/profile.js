@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet, TouchableNativeFeedback } from 'react-native';
-import {getUserToken, getUserId, setUserFavourites} from './asynchFunctions';
+import asyncHelp from './asynchFunctions';
 
 class Profile extends Component {
     constructor(props){
@@ -25,8 +25,8 @@ class Profile extends Component {
     }
 
     getUserInfo(){
-        let token = getUserToken();
-        let id = getUserId();
+        let token = asyncHelp.getUserToken();
+        let id = asyncHelp.getUserId();
 
         return fetch("http://10.0.2.2:3333/api/1.0.0/user/"+id, {
             method: 'get',
@@ -54,7 +54,7 @@ class Profile extends Component {
                 reviews: respJson.reviews,
                 likedReviews: respJson.likes_reviews
             });
-            setUserFavourites(JSON.stringify(respJson.favourite_locations));
+            asyncHelp.setUserFavourites(JSON.stringify(respJson.favourite_locations));
         })
     }
 
@@ -62,8 +62,8 @@ class Profile extends Component {
         this.setState({
             loading: true
         });
-        let token = getUserToken();
-        let id = getUserId();
+        let token = asyncHelp.getUserToken();
+        let id = asyncHelp.getUserId();
 
         let sendData = {
             first_name: this.state.firstName,

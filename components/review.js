@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet, TouchableNativeFeedback } from 'react-native';
-import {getUserToken, getUserId} from './asynchFunctions';
+import asyncHelp from './asynchFunctions';
 
 class Review extends Component{
 
@@ -52,7 +52,7 @@ class Review extends Component{
     //
 
     addPhoto(){
-        let token = getUserToken();
+        let token = asyncHelp.getUserToken();
 
         return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.locID+"/review/"+this.state.revID+"/photo", {
             method: 'post',
@@ -81,7 +81,7 @@ class Review extends Component{
     }
 
     deletePhoto(){
-        let token = getUserToken();
+        let token = asyncHelp.getUserToken();
 
         return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.locID+"/review/"+this.state.revID+"/photo", {
             method: 'delete',
@@ -110,7 +110,7 @@ class Review extends Component{
     }
 
     likeReview(){
-        let token = getUserToken();
+        let token = asyncHelp.getUserToken();
 
         return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.locID+"/review/"+this.state.revID+"/like", {
             method: 'post',
@@ -139,7 +139,7 @@ class Review extends Component{
     }
 
     unlikeReview(){
-        let token = getUserToken();
+        let token = asyncHelp.getUserToken();
 
         return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.locID+"/review/"+this.state.revID+"/like", {
             method: 'delete',

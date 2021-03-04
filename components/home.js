@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet, TouchableNativeFeedback } from 'react-native';
-import {getUserToken, getUserFavourites, setUserFavourites, setUserReviews} from './asynchFunctions';
+import asyncHelp from './asynchFunctions';
 
 class Home extends Component {
     constructor(props){
@@ -15,12 +15,12 @@ class Home extends Component {
     }
 
     componentDidMount(){
-        let token = getUserToken();
+        let token = asyncHelp.getUserToken();
         if(token != ""){
             this.getAllLocations();
             this.getUserInfo();
             this.setState({
-                favourites: getUserFavourites(),
+                favourites: asyncHelp.getUserFavourites(),
                 loading: false
             });
         } else{
@@ -31,7 +31,7 @@ class Home extends Component {
     }
 
     getAllLocations(){
-        let token = getUserToken();
+        let token = asyncHelp.getUserToken();
 
         return fetch("http://10.0.2.2:3333/api/1.0.0/find", {
             method: 'get',
@@ -61,8 +61,8 @@ class Home extends Component {
     }
 
     getUserInfo(){
-        let token = getUserToken();
-        let id = getUserId();
+        let token = asyncHelp.getUserToken();
+        let id = asyncHelp.getUserId();
         
         return fetch("http://10.0.2.2:3333/api/1.0.0/user/"+JSON.parse(id), {
             method: 'get',
@@ -82,8 +82,8 @@ class Home extends Component {
             }
         })
         .then((respJson) => {
-            setUserFavourites(JSON.stringify(respJson.favourite_locations))
-            setUserReviews(JSON.stringify(respJson.reviews))
+            asyncHelp.setUserFavourites(JSON.stringify(respJson.favourite_locations))
+            asyncHelp.setUserReviews(JSON.stringify(respJson.reviews))
         })
         .catch((error) => {
             console.log(error);
@@ -92,7 +92,7 @@ class Home extends Component {
 
     renderLocationList(){
         const nav = this.props.navigation;
-        let token = getUserToken();
+        let token = asyncHelp.getUserToken();
         if(this.state.loading){
             return(
               <View>
@@ -111,7 +111,7 @@ class Home extends Component {
                                     }
                                 }}>
                                     <Text>{item.location_name}</Text>
-                                    <Image source={require(item.photo_path)} />
+                                    <Image source={item.photo_path} />
                                 </TouchableOpacity>
                             );
                         })
