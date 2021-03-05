@@ -9,6 +9,8 @@ import Login from './components/login';
 import Logout from './components/logout';
 import SignUp from './components/signUp';
 import Profile from './components/profile';
+import Location from './components/location';
+import Review from './components/review';
 import asyncHelp from './components/asynchFunctions';
 
 const stackNav = createStackNavigator();
@@ -24,32 +26,11 @@ class CoffiApp extends Component {
     };
 
   }
-  
-  navLogin(){
-    const nav = this.props.navigation;
-    nav.navigate("Login");
-  }
-
-  navSignUp(){
-    const nav = this.props.navigation;
-    nav.navigate("SignUp");
-  }
-
-  navLogout(){
-    const nav = this.props.navigation;
-    nav.navigate("Logout");
-  }
-
-  navProfile(){
-    const nav = this.props.navigation;
-    nav.navigate("Profile");
-  }
 
   render(){
 
     // const stackNav = createStackNavigator();
     const token = asyncHelp.getUserToken();
-    const nav = this.props.navigation;
 
     /*
       if(this.state.loading){
@@ -67,13 +48,8 @@ class CoffiApp extends Component {
           <stackNav.Navigator initialRouteName="Home">
             <stackNav.Screen name="Home" component={Home} 
               options={{
-                headerTitle: "Home", 
-                headerRight: () => (
-                  <View>
-                    <Button title="Login" onPress={this.navLogin()} />
-                    <Button title="SignUp" onPress={this.navSignUp()} />
-                  </View>
-            )}} />
+                headerTitle: "Home"
+              }}/>
             <stackNav.Screen name="Login" component={Login} />
             <stackNav.Screen name="SignUp" component={SignUp} />
           </stackNav.Navigator>
@@ -85,15 +61,12 @@ class CoffiApp extends Component {
           <stackNav.Navigator initialRouteName="Home">
             <stackNav.Screen name="Home" component={Home} 
               options={{
-                headerTitle: "Home", 
-                headerRight: () => (
-                  <View>
-                    <Button title="Logout" onPress={this.navLogout()} />
-                    <Button title="Profile" onPress={this.navProfile()} />
-                  </View>
-            )}} />
+                headerTitle: "Home"
+              }} />
             <stackNav.Screen name="Profile" component={Profile} />
             <stackNav.Screen name="Logout" component={Logout} />
+            <stackNav.Screen name="Location" component={Location} />
+            <stackNav.Screen name="Review" component={Review} />
           </stackNav.Navigator>
         </NavigationContainer>
       );

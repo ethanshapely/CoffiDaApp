@@ -121,7 +121,28 @@ class Home extends Component {
         }
     }
 
+    navLogin(){
+        const nav = this.props.navigation;
+        nav.navigate("Login");
+    }
+    
+    navSignUp(){
+        const nav = this.props.navigation;
+        nav.navigate("SignUp");
+    }
+    
+    navLogout(){
+        const nav = this.props.navigation;
+        nav.navigate("Logout");
+    }
+    
+    navProfile(){
+        const nav = this.props.navigation;
+        nav.navigate("Profile");
+    }
+
     render(){
+        let token = asyncHelp.getUserToken();
         if(this.state.loading){
             return(
                 <View>
@@ -129,13 +150,30 @@ class Home extends Component {
                 </View>
             );
         } else{
-            return(
-                <View>
-                    <Text>CoffiDa</Text>
-                    <Text>Welcome to the CoffiDa App, below you will find a collection of assorted Cafés</Text>
-                    {this.renderLocationList()}
-                </View>
-            );
+            if(token === "" || token === null){
+                return(
+                    <View>
+                        <Text>CoffiDa</Text>
+                        <Text>Welcome to the CoffiDa App, below you will find a collection of assorted Cafés</Text>
+                        <View>
+                            <Button title="Login" onPress={this.navLogin()} />
+                            <Button title="SignUp" onPress={this.navSignUp()} />
+                        </View>
+                    </View>
+                );
+            } else{
+                return(
+                    <View>
+                        <Text>CoffiDa</Text>
+                        <Text>Welcome to the CoffiDa App, below you will find a collection of assorted Cafés</Text>
+                        <View>
+                            <Button title="Logout" onPress={this.navLogout()} />
+                            <Button title="Profile" onPress={this.navProfile()} />
+                        </View>
+                        {this.renderLocationList()}
+                    </View>
+                );
+            }
         }
     }
 }
