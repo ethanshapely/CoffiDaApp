@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet, TouchableNativeFeedback } from 'react-native';
+import { View, ScrollView, Text, TextInput, Title, Image, Button, TouchableOpacity, StyleSheet, TouchableNativeFeedback } from 'react-native';
 import asyncHelp from './asynchFunctions';
 import Review from './review';
 

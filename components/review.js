@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet, TouchableNativeFeedback } from 'react-native';
+import { View, ScrollView, Text, Image, Button, TextInput, TouchableOpacity, StyleSheet, TouchableNativeFeedback } from 'react-native';
 import asyncHelp from './asynchFunctions';
 
 class Review extends Component{
