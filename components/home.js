@@ -149,31 +149,29 @@ class Home extends Component {
                     <Text>Loading...</Text>
                 </View>
             );
+        } else if(token === "" || token === null){
+            return(
+                <View>
+                    <Text>CoffiDa</Text>
+                    <Text>Welcome to the CoffiDa App, below you will find a collection of assorted Cafés</Text>
+                    <View>
+                        <Button title="Login" onPress={this.navLogin()} />
+                        <Button title="SignUp" onPress={this.navSignUp()} />
+                    </View>
+                </View>
+            );
         } else{
-            if(token === "" || token === null){
-                return(
+            return(
+                <View>
+                    <Text>CoffiDa</Text>
+                    <Text>Welcome to the CoffiDa App, below you will find a collection of assorted Cafés</Text>
                     <View>
-                        <Text>CoffiDa</Text>
-                        <Text>Welcome to the CoffiDa App, below you will find a collection of assorted Cafés</Text>
-                        <View>
-                            <Button title="Login" onPress={this.navLogin()} />
-                            <Button title="SignUp" onPress={this.navSignUp()} />
-                        </View>
+                        <Button title="Logout" onPress={this.navLogout()} />
+                        <Button title="Profile" onPress={this.navProfile()} />
                     </View>
-                );
-            } else{
-                return(
-                    <View>
-                        <Text>CoffiDa</Text>
-                        <Text>Welcome to the CoffiDa App, below you will find a collection of assorted Cafés</Text>
-                        <View>
-                            <Button title="Logout" onPress={this.navLogout()} />
-                            <Button title="Profile" onPress={this.navProfile()} />
-                        </View>
-                        {this.renderLocationList()}
-                    </View>
-                );
-            }
+                    {this.renderLocationList()}
+                </View>
+            );
         }
     }
 }
