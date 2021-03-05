@@ -37,9 +37,9 @@ class Login extends Component{
             if(response.status === 200){
                 return response.json()
             } else if(response.status === 400){
-                throw "Invalid email/password"
+                console.log("Invalid email/password")
             } else{
-                throw "Server side error"
+                console.log("Server side error")
             }
         })
         .then((respJson) => {

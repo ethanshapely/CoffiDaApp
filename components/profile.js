@@ -38,11 +38,11 @@ class Profile extends Component {
             if(response.status === 200){
                 return response.json()
             } else if(response.status === 401){
-                throw "Unauthorised: You must be logged in to view your profile"
+                console.log("Unauthorised: You must be logged in to view your profile");
             } else if(response.status === 404){
-                throw "User not found"
+                console.log("User not found");
             } else{
-                throw "Server side error"
+                console.log("Server side error");
             }
         })
         .then((respJson) => {
@@ -86,15 +86,15 @@ class Profile extends Component {
                 });
                 console.log("User profile updated")
             } else if(response.status === 400){
-                throw "Bad request sent"
+                console.log("Bad request sent");
             } else if(response.status === 401){
-                throw "Unauthorised: You must be logged in to alter your profile"
+                console.log("Unauthorised: You must be logged in to alter your profile");
             } else if(response.status === 403){
-                throw "Forbidden: You cannot alter a user's profile other than your own"
+                console.log("Forbidden: You cannot alter a user's profile other than your own");
             } else if(response.status === 404){
-                throw "User not found"
+                console.log("User not found");
             } else{
-                throw "Server side error"
+                console.log("Server side error");
             }
         })
         .catch((error) => {

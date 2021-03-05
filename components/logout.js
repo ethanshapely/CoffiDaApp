@@ -39,9 +39,9 @@ class Logout extends Component{
                 asyncHelp.setUserFavourites("");
                 this.props.navigation.goBack();
             } else if(response.status === 401){
-                throw "Unauthorised: You must be logged in in order to logout"
+                console.log("Unauthorised: You must be logged in in order to logout");
             } else{
-                throw "Server side error"
+                console.log("Server side error");
             }
         })
         .catch((error) => {

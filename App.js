@@ -9,7 +9,9 @@ import Login from './components/login';
 import Logout from './components/logout';
 import SignUp from './components/signUp';
 import Profile from './components/profile';
-import getUserToken from './components/asynchFunctions';
+import asyncHelp from './components/asynchFunctions';
+
+const stackNav = createStackNavigator();
 
 class CoffiApp extends Component {
   
@@ -25,8 +27,8 @@ class CoffiApp extends Component {
   
   render(){
 
-    const stackNav = createStackNavigator();
-    const token = getUserToken();
+    // const stackNav = createStackNavigator();
+    const token = asyncHelp.getUserToken();
     const nav = this.props.navigation;
 
     /*
@@ -42,7 +44,7 @@ class CoffiApp extends Component {
     if(token === ""){
       return(
         <NavigationContainer>
-          <stackNav.Navigator initialRouteName="Home" >
+          <stackNav.Navigator>
             <stackNav.Screen name="Home" component={Home} 
               options={{
                 headerTitle: "Home", 

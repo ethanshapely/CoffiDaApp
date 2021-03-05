@@ -79,9 +79,9 @@ class Location extends Component{
             if(response.status === 200){
                 return response.json()
             }else if(response.status === 404){
-                throw "Unauthorised: You must be logged in in order to logout"
+                console.log("Unauthorised: You must be logged in in order to logout");
             }else{
-                throw "Server side error"
+                console.log("Server side error");
             }
         })
         .then((respJson) => {
@@ -117,13 +117,13 @@ class Location extends Component{
             if(response.status === 200){
                 return true
             } else if(response.status === 400){
-                throw "Bad request sent"
+                console.log("Bad request sent");
             } else if(response.status === 401){
-                throw "Unauthorised: You must be logged in in order to favourite a Cafe location"
+                console.log("Unauthorised: You must be logged in in order to favourite a Cafe location");
             } else if(response.status === 404){
-                throw "No location found for request"
+                console.log("No location found for request");
             } else{
-                throw "Server side error"
+                console.log("Server side error");
             }
         })
         .catch((error) => {
@@ -144,15 +144,15 @@ class Location extends Component{
             if(response.status === 200){
                 return true
             } else if(response.status === 400){
-                throw "Bad request sent"
+                console.log("Bad request sent");
             } else if(response.status === 401){
-                throw "Unauthorised: You must be logged in in order to unfavourite a Cafe location"
+                console.log("Unauthorised: You must be logged in in order to unfavourite a Cafe location");
             } else if(response.status === 403){
-                throw "Forbidden: You cannot unfavourite a location that is not in your favourites"
+                console.log("Forbidden: You cannot unfavourite a location that is not in your favourites");
             } else if(response.status === 404){
-                throw "No location found for request"
+                console.log("No location found for request");
             } else{
-                throw "Server side error"
+                console.log("Server side error");
             }
         })
         .catch((error) => {
@@ -189,13 +189,13 @@ class Location extends Component{
                 });
                 console.log("Review created")
             } else if(response.status === 400){
-                throw "Bad request sent"
+                console.log("Bad request sent");
             } else if(response.status === 401){
-                throw "Unauthorised: You must be logged in in order to create a review"
+                console.log("Unauthorised: You must be logged in in order to create a review");
             } else if(response.status === 404){
-                throw "No location found for request"
+                console.log("No location found for request");
             } else{
-                throw "Server side error"
+                console.log("Server side error");
             }
         })
         .catch((error) => {
@@ -234,15 +234,15 @@ class Location extends Component{
                 });
                 console.log("Review updated")
             } else if(response.status === 400){
-                throw "Bad request sent"
+                console.log("Bad request sent");
             } else if(response.status === 401){
-                throw "Unauthorised: You must be logged in in order to edit a review"
+                console.log("Unauthorised: You must be logged in in order to edit a review");
             } else if(response.status === 403){
-                throw "Forbidden: You cannot update a review that doesn't exist"
+                console.log("Forbidden: You cannot update a review that doesn't exist");
             } else if(response.status === 404){
-                throw "No review found for request"
+                console.log("No review found for request");
             } else{
-                throw "Server side error"
+                console.log("Server side error");
             }
         })
         .catch((error) => {
@@ -273,15 +273,15 @@ class Location extends Component{
                 });
                 console.log("Review deleted")
             } else if(response.status === 400){
-                throw "Bad request sent"
+                console.log("Bad request sent");
             } else if(response.status === 401){
-                throw "Unauthorised: You must be logged in in order to delete a review"
+                console.log("Unauthorised: You must be logged in in order to delete a review");
             } else if(response.status === 403){
-                throw "Forbidden: You cannot delete a review that doesn't exist"
+                console.log("Forbidden: You cannot delete a review that doesn't exist");
             } else if(response.status === 404){
-                throw "No review found for request"
+                console.log("No review found for request");
             } else{
-                throw "Server side error"
+                console.log("Server side error");
             }
         })
         .catch((error) => {

@@ -34,9 +34,9 @@ class Review extends Component{
             if(response.status === 200){
                 return response.json()
             } else if(response.status === 404){
-                throw "No image found"
+                console.log("No image found");
             } else{
-                throw "Server side error"
+                console.log("Server side error");
             }
         })
         .then((respJson) => {
@@ -66,13 +66,13 @@ class Review extends Component{
             if(response.status === 200){
                 console.log("Photo added")
             } else if(response.status === 400){
-                throw "Bad request sent"
+                console.log("Bad request sent");
             } else if(response.status === 401){
-                throw "Unauthorised: You must be logged in in order to add a photo to a review"
+                console.log("Unauthorised: You must be logged in in order to add a photo to a review");
             } else if(response.status === 404){
-                throw "No review found for request"
+                console.log("No review found for request");
             } else{
-                throw "Server side error"
+                console.log("Server side error");
             }
         })
         .catch((error) => {
@@ -93,15 +93,15 @@ class Review extends Component{
             if(response.status === 200){
                 console.log("Photo deleted")
             } else if(response.status === 400){
-                throw "Bad request sent"
+                console.log( "Bad request sent");
             } else if(response.status === 401){
-                throw "Unauthorised: You must be logged in in order to delete a review"
+                console.log("Unauthorised: You must be logged in in order to delete a review");
             } else if(response.status === 403){
-                throw "Forbidden: You cannot delete a review that doesn't exist"
+                console.log("Forbidden: You cannot delete a review that doesn't exist");
             } else if(response.status === 404){
-                throw "No review found for request"
+                console.log("No review found for request");
             } else{
-                throw "Server side error"
+                console.log("Server side error");
             }
         })
         .catch((error) => {
@@ -122,15 +122,15 @@ class Review extends Component{
             if(response.status === 200){
                 console.log("Like added")
             } else if(response.status === 400){
-                throw "Bad request sent"
+                console.log("Bad request sent");
             } else if(response.status === 401){
-                throw "Unauthorised: You must be logged in in order to like a review"
+                console.log("Unauthorised: You must be logged in in order to like a review");
             } else if(response.status === 403){
-                throw "Forbidden: You cannot like a review that doesn't exist"
+                console.log("Forbidden: You cannot like a review that doesn't exist");
             } else if(response.status === 404){
-                throw "No review found for request"
+                console.log("No review found for request");
             } else{
-                throw "Server side error"
+                console.log("Server side error");
             }
         })
         .catch((error) => {
@@ -151,15 +151,15 @@ class Review extends Component{
             if(response.status === 200){
                 console.log("Like removed")
             } else if(response.status === 400){
-                throw "Bad request sent"
+                console.log("Bad request sent");
             } else if(response.status === 401){
-                throw "Unauthorised: You must be logged in in order to unlike a review"
+                console.log("Unauthorised: You must be logged in in order to unlike a review");
             } else if(response.status === 403){
-                throw "Forbidden: You cannot unlike a review that doesn't exist"
+                console.log("Forbidden: You cannot unlike a review that doesn't exist");
             } else if(response.status === 404){
-                throw "No review found for request"
+                console.log("No review found for request");
             } else{
-                throw "Server side error"
+                console.log("Server side error");
             }
         })
         .catch((error) => {

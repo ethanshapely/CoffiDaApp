@@ -43,11 +43,11 @@ class Home extends Component {
             if(response.status === 200){
                 return response.json()
             } else if(response.status === 400){
-                throw "Bad server request"
+                console.log("Bad server request");
             } else if(response.status === 401){
-                throw "Unauthorised: You must be logged in in order to logout"
+                console.log("Unauthorised: You must be logged in in order to logout");
             } else{
-                throw "Server side error"
+                console.log("Server side error");
             }
         })
         .then((respJson) => {
@@ -74,11 +74,11 @@ class Home extends Component {
             if(response.status === 200){
                 return response.json()
             } else if(response.status === 401){
-                throw "Unauthorised: You must be logged in in order to have you're favourites processed"
+                console.log("Unauthorised: You must be logged in in order to have you're favourites processed");
             } else if(response.status === 404){
-                throw "No user found for request"
+                console.log("No user found for request");
             } else{
-                throw "Server side error"
+                console.log("Server side error");
             }
         })
         .then((respJson) => {

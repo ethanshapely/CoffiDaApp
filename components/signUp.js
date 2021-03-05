@@ -33,11 +33,11 @@ class SignUp extends Component{
         })
         .then((response) => {
             if(response.status === 201){
-                Alert.alert("New user created");
+                console.log("New user created");
             } else if(response.status === 400){
-                throw "Bad data sent on request"
+                console.log("Bad data sent on request");
             } else{
-                throw "Server side error"
+                console.log("Server side error");
             }
         })
         .catch((error) => {

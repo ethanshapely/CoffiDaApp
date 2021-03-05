@@ -1,8 +1,8 @@
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const asyncHelp = {
 
-    getUserToken = async() => {
+    getUserToken: async() => {
         try{
             return await AsyncStorage.getItem('@user_token');
         } catch(e){
@@ -10,7 +10,7 @@ const asyncHelp = {
         }
     },
 
-    setUserToken = async(value) => {
+    setUserToken: async(value) => {
         try{
             return await AsyncStorage.setItem('@user_token', value);
         } catch(e){
@@ -18,7 +18,7 @@ const asyncHelp = {
         }
     },
 
-    getUserId = async() => {
+    getUserId: async() => {
         try{
             return await AsyncStorage.getItem('@user_id');
         } catch(e){
@@ -26,7 +26,7 @@ const asyncHelp = {
         }
     },
 
-    setUserId = async(value) => {
+    setUserId: async(value) => {
         try{
             return await AsyncStorage.setItem('@user_id', value);
         } catch(e){
@@ -34,7 +34,7 @@ const asyncHelp = {
         }
     },
 
-    getUserFavourites = async() => {
+    getUserFavourites: async() => {
         try{
             return await AsyncStorage.getItem('@user_favourites')
         } catch(e){
@@ -42,7 +42,7 @@ const asyncHelp = {
         }
     },
 
-    setUserFavourites = async(value) => {
+    setUserFavourites: async(value) => {
         try{
             return await AsyncStorage.setItem('@user_favourites', value)
         } catch(e){
@@ -50,7 +50,7 @@ const asyncHelp = {
         }
     },
 
-    getUserReviews = async() => {
+    getUserReviews: async() => {
         try{
             return await AsyncStorage.getItem('@user_reviews')
         } catch(e){
@@ -58,7 +58,7 @@ const asyncHelp = {
         }
     },
 
-    setUserReviews = async(value) => {
+    setUserReviews: async(value) => {
         try{
             return await AsyncStorage.setItem('@user_reviews', value)
         } catch(e){
