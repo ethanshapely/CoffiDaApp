@@ -44,7 +44,7 @@ class CoffiApp extends Component {
     if(token === ""){
       return(
         <NavigationContainer>
-          <stackNav.Navigator>
+          <stackNav.Navigator initialRouteName="Home">
             <stackNav.Screen name="Home" component={Home} 
               options={{
                 headerTitle: "Home", 
