@@ -51,63 +51,63 @@ class Review extends Component{
 
     //
 
-    addPhoto(){
-        let token = asyncHelp.getUserToken();
+    // addPhoto(){
+    //     let token = asyncHelp.getUserToken();
 
-        return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.locID+"/review/"+this.state.revID+"/photo", {
-            method: 'post',
-            headers: {
-                'X-Authorisation': token//,
-                //'Content-Type': 'image/png','image/jpeg'
-            },
-            body: ""//Get image
-        })
-        .then((response) => {
-            if(response.status === 200){
-                console.log("Photo added")
-            } else if(response.status === 400){
-                console.log("Bad request sent");
-            } else if(response.status === 401){
-                console.log("Unauthorised: You must be logged in in order to add a photo to a review");
-            } else if(response.status === 404){
-                console.log("No review found for request");
-            } else{
-                console.log("Server side error");
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-    }
+    //     return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.locID+"/review/"+this.state.revID+"/photo", {
+    //         method: 'post',
+    //         headers: {
+    //             'X-Authorisation': token//,
+    //             //'Content-Type': 'image/png','image/jpeg'
+    //         },
+    //         body: ""//Get image
+    //     })
+    //     .then((response) => {
+    //         if(response.status === 200){
+    //             console.log("Photo added")
+    //         } else if(response.status === 400){
+    //             console.log("Bad request sent");
+    //         } else if(response.status === 401){
+    //             console.log("Unauthorised: You must be logged in in order to add a photo to a review");
+    //         } else if(response.status === 404){
+    //             console.log("No review found for request");
+    //         } else{
+    //             console.log("Server side error");
+    //         }
+    //     })
+    //     .catch((error) => {
+    //         console.log(error);
+    //     })
+    // }
 
-    deletePhoto(){
-        let token = asyncHelp.getUserToken();
+    // deletePhoto(){
+    //     let token = asyncHelp.getUserToken();
 
-        return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.locID+"/review/"+this.state.revID+"/photo", {
-            method: 'delete',
-            headers: {
-                'X-Authorisation': token
-            }
-        })
-        .then((response) => {
-            if(response.status === 200){
-                console.log("Photo deleted")
-            } else if(response.status === 400){
-                console.log( "Bad request sent");
-            } else if(response.status === 401){
-                console.log("Unauthorised: You must be logged in in order to delete a review");
-            } else if(response.status === 403){
-                console.log("Forbidden: You cannot delete a review that doesn't exist");
-            } else if(response.status === 404){
-                console.log("No review found for request");
-            } else{
-                console.log("Server side error");
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-    }
+    //     return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.locID+"/review/"+this.state.revID+"/photo", {
+    //         method: 'delete',
+    //         headers: {
+    //             'X-Authorisation': token
+    //         }
+    //     })
+    //     .then((response) => {
+    //         if(response.status === 200){
+    //             console.log("Photo deleted")
+    //         } else if(response.status === 400){
+    //             console.log( "Bad request sent");
+    //         } else if(response.status === 401){
+    //             console.log("Unauthorised: You must be logged in in order to delete a review");
+    //         } else if(response.status === 403){
+    //             console.log("Forbidden: You cannot delete a review that doesn't exist");
+    //         } else if(response.status === 404){
+    //             console.log("No review found for request");
+    //         } else{
+    //             console.log("Server side error");
+    //         }
+    //     })
+    //     .catch((error) => {
+    //         console.log(error);
+    //     })
+    // }
 
     likeReview(){
         let token = asyncHelp.getUserToken();
@@ -190,26 +190,6 @@ class Review extends Component{
     }
 
     render(){
-        // if(this.state.userOwned){
-        //     return(
-        //         <View>
-        //             <label for="overallRating">Overall Rating</label>
-        //             <input type="number" id="overallRating" min={1} max={5} value={this.state.overallRating} />
-        //             <label for="priceRating">Price Rating</label>
-        //             <input type="number" id="priceRating" min={1} max={5} value={this.state.priceRating} />
-        //             <label for="qualityRating">Quality Rating</label>
-        //             <input type="number" id="qualityRating" min={1} max={5} value={this.state.qualityRating} />
-        //             <label for="clenlinessRating">Clenliness Rating</label>
-        //             <input type="number" id="clenlinessRating" min={1} max={5} value={this.state.clenlinessRating} />
-        //             <TextInput 
-        //                 onChangeText={text => onChangeText(text)}
-        //                 value={this.state.reviewBody} 
-        //             />
-        //             {/* add import image button and small preview of current image */}
-        //             <Button title="Update" onPress={this.updateReview} />
-        //         </View>
-        //     )
-        // } else{
         return(
             <View>
                 <h3>{this.state.name}</h3>

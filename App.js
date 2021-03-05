@@ -41,7 +41,7 @@ class CoffiApp extends Component {
       } 
     */
 
-    if(token === ""){
+    if(token === "" || token === null){
       return(
         <NavigationContainer>
           <stackNav.Navigator initialRouteName="Home">

@@ -211,7 +211,7 @@ class Location extends Component{
             loading: true
         });
         let token = asyncHelp.getUserToken();
-        let sendData={
+        let sendData = {
             overall_rating: this.state.userOverallRating,
             price_rating: this.state.userPriceRating,
             quality_rating: this.state.userQualityRating,
@@ -314,40 +314,6 @@ class Location extends Component{
     }
 
     renderReviewWrite(){
-        /*
-        header: rating selections
-        review body
-
-        if review exists: load start data, set button to send update (patch) request
-        else: load numbers as 3 and review body as 'Type here...'
-              set button to send write (post) request
-
-        state: reviewed: props.reviewed
-
-        componentDidMount:
-        if(this.state.reviewed){
-            this.setState({
-                userReviewBody: user's Review body
-                userOverallRating: 
-                userPriceRating:
-
-            })
-        } else{
-
-        }
-
-        button text = this.state.reviewButtonText
-        if reviewed: "Update"
-        else: "Submit"
-
-        Delete button:
-            set ' this.state.reviewed: ' false in delete request
-            set reviewButtonText to "Submit"
-        <View>
-            <>
-        </View>
-        
-        */
         if(this.state.reviewedByUser){
             return(
                 <View>
@@ -364,7 +330,7 @@ class Location extends Component{
                         value={this.state.reviewBody} 
                     />
                     {/* add import image button and small preview of current image */}
-                    <Button title="Update" onPress={this.updateReview} />
+                    <Button title="Update" onPress={this.updateReview()} />
                     <Button title="Delete" onPress={this.deleteReview()} />
                 </View>
             );

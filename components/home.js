@@ -106,7 +106,7 @@ class Home extends Component {
                         this.state.locationsList.map((item) => {
                             return(
                                 <TouchableOpacity onPress={() => {
-                                    if(token != "" || null){
+                                    if(token !== "" || token !== null){
                                         nav.navigate("Location",{id: item.location_id})
                                     }
                                 }}>
@@ -132,7 +132,7 @@ class Home extends Component {
             return(
                 <View>
                     <Text>CoffiDa</Text>
-                    <Text>Welcome to the CoffiDa App, below you will find a collection of assorted Café</Text>
+                    <Text>Welcome to the CoffiDa App, below you will find a collection of assorted Cafés</Text>
                     {this.renderLocationList()}
                 </View>
             );
