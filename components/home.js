@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, TouchableOpacity, Image } from 'react-native';
+import { View, ScrollView, Text, Button, TouchableOpacity, Image } from 'react-native';
 import asyncHelp from './asynchFunctions';
 
 class Home extends Component {
