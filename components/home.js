@@ -16,7 +16,7 @@ class Home extends Component {
 
     componentDidMount(){
         let token = asyncHelp.getUserToken();
-        if(token != "" || token != null){
+        if(token !== "" || token !== null){
             this.getAllLocations();
             this.getUserInfo();
             this.setState({
@@ -45,7 +45,7 @@ class Home extends Component {
             } else if(response.status === 400){
                 console.log("Bad server request");
             } else if(response.status === 401){
-                console.log("Unauthorised: You must be logged in in order to logout");
+                console.log("Unauthorised: You must be logged in in order to access different locations");
             } else{
                 console.log("Server side error");
             }
@@ -93,7 +93,7 @@ class Home extends Component {
     renderLocationList(){
         const nav = this.props.navigation;
         let token = asyncHelp.getUserToken();
-        if(this.state.locationsList === null){
+        if(this.state.locationsList === null || this.state.locationsList === undefined){
             return(
               <View>
                 <Text>No locations found</Text>
@@ -106,7 +106,7 @@ class Home extends Component {
                         this.state.locationsList.map((item) => {
                             return(
                                 <TouchableOpacity onPress={() => {
-                                    if(token != ""){
+                                    if(token != "" || null){
                                         nav.navigate("Location",{id: item.location_id})
                                     }
                                 }}>
