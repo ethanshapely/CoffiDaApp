@@ -44,7 +44,7 @@ class Login extends Component{
         })
         .then((respJson) => {
             asyncHelp.setUserToken(respJson.session_token);
-            asyncHelp.setUserId(JSON.stringify(respJson.user_id));
+            asyncHelp.setUserId(respJson.user_id.toString());
             asyncHelp.setUserFavourites("");
             asyncHelp.setUserReviews("");
             this.props.navigation.goBack();

@@ -16,7 +16,7 @@ class Home extends Component {
 
     componentDidMount(){
         let token = asyncHelp.getUserToken();
-        if(token != ""){
+        if(token != "" || token != null){
             this.getAllLocations();
             this.getUserInfo();
             this.setState({
@@ -64,7 +64,7 @@ class Home extends Component {
         let token = asyncHelp.getUserToken();
         let id = asyncHelp.getUserId();
         
-        return fetch("http://10.0.2.2:3333/api/1.0.0/user/"+JSON.parse(id), {
+        return fetch("http://10.0.2.2:3333/api/1.0.0/user/"+id, {
             method: 'get',
             headers: {
                 'X-Authorisation': token
@@ -93,10 +93,10 @@ class Home extends Component {
     renderLocationList(){
         const nav = this.props.navigation;
         let token = asyncHelp.getUserToken();
-        if(this.state.loading){
+        if(this.state.locationsList === null){
             return(
               <View>
-                <Text>Loading...</Text>
+                <Text>No locations found</Text>
               </View>
             );
         } else{

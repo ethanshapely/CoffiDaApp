@@ -37,6 +37,7 @@ class Logout extends Component{
                 asyncHelp.setUserToken("");
                 asyncHelp.setUserId("");
                 asyncHelp.setUserFavourites("");
+                asyncHelp.setUserReviews("");
                 this.props.navigation.goBack();
             } else if(response.status === 401){
                 console.log("Unauthorised: You must be logged in in order to logout");
