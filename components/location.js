@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, TextInput, Title, Image, Button, TouchableOpacity, StyleSheet, TouchableNativeFeedback } from 'react-native';
+import { View, ScrollView, Text, TextInput, Image, Button, TouchableOpacity, StyleSheet, TouchableNativeFeedback } from 'react-native';
 import asyncHelp from './asynchFunctions';
 import Review from './review';
 
@@ -398,7 +398,7 @@ class Location extends Component{
         if(token === ""){
             return(
                 <View>
-                    <Title>{this.state.locTown+": "+this.state.locName}</Title>
+                    <Text>{this.state.locTown+": "+this.state.locName}</Text>
                     <Image url={this.state.photoPath} />
                     <View>
                         <Text>Average Overall Rating: {this.state.avgOverallRating}</Text>
@@ -411,7 +411,7 @@ class Location extends Component{
         } else{
             return(
                 <View>
-                    <Title>{this.state.locTown+": "+this.state.locName}</Title>
+                    <Text>{this.state.locTown+": "+this.state.locName}</Text>
                     <Image url={this.state.photoPath} />
                     <View>
                         <Text>Average Overall Rating: {this.state.avgOverallRating}</Text>

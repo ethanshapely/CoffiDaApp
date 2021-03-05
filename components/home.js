@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet, Image, Title } from 'react-native';
+import { View, ScrollView, Text, TouchableOpacity, Image } from 'react-native';
 import asyncHelp from './asynchFunctions';
 
 class Home extends Component {
@@ -131,7 +131,7 @@ class Home extends Component {
         } else{
             return(
                 <View>
-                    <Title>CoffiDa</Title>
+                    <Text>CoffiDa</Text>
                     <Text>Welcome to the CoffiDa App, below you will find a collection of assorted Café</Text>
                     {this.renderLocationList()}
                 </View>
