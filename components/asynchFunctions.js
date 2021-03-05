@@ -7,6 +7,7 @@ const asyncHelp = {
             return await AsyncStorage.getItem('@user_token');
         } catch(e){
             console.log(e);
+            return null;
         }
     },
 
@@ -15,6 +16,7 @@ const asyncHelp = {
             return await AsyncStorage.setItem('@user_token', value);
         } catch(e){
             console.log(e);
+            return null;
         }
     },
 
@@ -23,6 +25,7 @@ const asyncHelp = {
             return await AsyncStorage.getItem('@user_id');
         } catch(e){
             console.log(e);
+            return null;
         }
     },
 
@@ -31,6 +34,7 @@ const asyncHelp = {
             return await AsyncStorage.setItem('@user_id', value);
         } catch(e){
             console.log(e);
+            return null;
         }
     },
 
@@ -39,6 +43,7 @@ const asyncHelp = {
             return await AsyncStorage.getItem('@user_favourites')
         } catch(e){
             console.log(e);
+            return null;
         }
     },
 
@@ -47,6 +52,7 @@ const asyncHelp = {
             return await AsyncStorage.setItem('@user_favourites', value)
         } catch(e){
             console.log(e);
+            return null;
         }
     },
 
@@ -55,6 +61,7 @@ const asyncHelp = {
             return await AsyncStorage.getItem('@user_reviews')
         } catch(e){
             console.log(e);
+            return null;
         }
     },
 
@@ -63,6 +70,7 @@ const asyncHelp = {
             return await AsyncStorage.setItem('@user_reviews', value)
         } catch(e){
             console.log(e);
+            return null;
         }
     }
 }

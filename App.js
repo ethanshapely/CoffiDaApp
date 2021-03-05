@@ -25,6 +25,26 @@ class CoffiApp extends Component {
 
   }
   
+  navLogin(){
+    const nav = this.props.navigation;
+    nav.navigate("Login");
+  }
+
+  navSignUp(){
+    const nav = this.props.navigation;
+    nav.navigate("SignUp");
+  }
+
+  navLogout(){
+    const nav = this.props.navigation;
+    nav.navigate("Logout");
+  }
+
+  navProfile(){
+    const nav = this.props.navigation;
+    nav.navigate("Profile");
+  }
+
   render(){
 
     // const stackNav = createStackNavigator();
@@ -50,8 +70,8 @@ class CoffiApp extends Component {
                 headerTitle: "Home", 
                 headerRight: () => (
                   <View>
-                    <Button title="Login" onPress={() => nav.navigate("Login")} />
-                    <Button title="SignUp" onPress={() => nav.navigate("SignUp")} />
+                    <Button title="Login" onPress={this.navLogin()} />
+                    <Button title="SignUp" onPress={this.navSignUp()} />
                   </View>
             )}} />
             <stackNav.Screen name="Login" component={Login} />
@@ -67,7 +87,10 @@ class CoffiApp extends Component {
               options={{
                 headerTitle: "Home", 
                 headerRight: () => (
-                  <Button title="Logout" onPress={() => nav.navigate("Logout")} />
+                  <View>
+                    <Button title="Logout" onPress={this.navLogout()} />
+                    <Button title="Profile" onPress={this.navProfile()} />
+                  </View>
             )}} />
             <stackNav.Screen name="Profile" component={Profile} />
             <stackNav.Screen name="Logout" component={Logout} />
