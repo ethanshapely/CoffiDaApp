@@ -50,8 +50,14 @@ class CoffiApp extends Component {
               options={{
                 headerTitle: "Home"
               }}/>
-            <stackNav.Screen name="Login" component={Login} />
-            <stackNav.Screen name="SignUp" component={SignUp} />
+            <stackNav.Screen name="Login" component={Login} 
+              options={{
+                headerTitle: "Login"
+            }}/>
+            <stackNav.Screen name="SignUp" component={SignUp} 
+              options={{
+                headerTitle: "SignUp"
+            }}/>
           </stackNav.Navigator>
         </NavigationContainer>
       );
@@ -63,10 +69,22 @@ class CoffiApp extends Component {
               options={{
                 headerTitle: "Home"
               }} />
-            <stackNav.Screen name="Profile" component={Profile} />
-            <stackNav.Screen name="Logout" component={Logout} />
-            <stackNav.Screen name="Location" component={Location} />
-            <stackNav.Screen name="Review" component={Review} />
+            <stackNav.Screen name="Profile" component={Profile} 
+              options={{
+                headerTitle: "Profile"
+            }}/>
+            <stackNav.Screen name="Logout" component={Logout} 
+              options={{
+                headerTitle: "Logout"
+            }}/>
+            <stackNav.Screen name="Location" component={Location} 
+              options={{
+                headerTitle: "Location"
+            }}/>
+            <stackNav.Screen name="Review" component={Review} 
+              options={{
+                headerTitle: "Review"
+            }}/>
           </stackNav.Navigator>
         </NavigationContainer>
       );
